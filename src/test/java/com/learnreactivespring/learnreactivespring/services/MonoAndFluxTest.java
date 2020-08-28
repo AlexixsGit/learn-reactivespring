@@ -2,6 +2,7 @@ package com.learnreactivespring.learnreactivespring.services;
 
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 public class MonoAndFluxTest {
@@ -49,6 +50,22 @@ public class MonoAndFluxTest {
         StepVerifier.create(food)
                 .expectNextCount(3)
                 .expectErrorMessage("Error")
+                .verify();
+    }
+
+    @Test
+    public void get_element_from_mono_if_there_are_element_test() {
+        Mono<String> product = Mono.just("Ipad");
+
+        StepVerifier.create(product)
+                .expectNext("Ipad")
+                .verifyComplete();
+    }
+
+    @Test
+    public void get_element_from_mono_when_there_is_error_test() {
+        StepVerifier.create(Mono.error(new RuntimeException("Index")))
+                .expectError(RuntimeException.class)
                 .verify();
     }
 }
