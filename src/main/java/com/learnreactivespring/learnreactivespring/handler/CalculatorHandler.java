@@ -20,4 +20,11 @@ public class CalculatorHandler {
                 .body(this.calculatorService.sum(serverRequest.queryParam("value1").get(),
                         serverRequest.queryParam("value2").get()), Double.class);
     }
+
+    public Mono<ServerResponse> multiply(ServerRequest serverRequest) {
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(this.calculatorService.multiply(serverRequest.queryParam("value1").get(),
+                        serverRequest.queryParam("value2").get()), Double.class);
+    }
 }

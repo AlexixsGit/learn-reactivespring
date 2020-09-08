@@ -25,8 +25,10 @@ public class RouterFunctionConfig {
 
     @Bean
     public RouterFunction<ServerResponse> calculatorRoute(CalculatorHandler calculatorHandler) {
-        return RouterFunctions.route(GET("/functional/calculator")
-                .and(accept(MediaType.APPLICATION_JSON)), calculatorHandler::sum);
+        return RouterFunctions.route(GET("/functional/calculator/sum")
+                .and(accept(MediaType.APPLICATION_JSON)), calculatorHandler::sum)
+                .andRoute(GET("/functional/calculator/multiply").and(accept(MediaType.APPLICATION_JSON)),
+                        calculatorHandler::multiply);
     }
 
 }
