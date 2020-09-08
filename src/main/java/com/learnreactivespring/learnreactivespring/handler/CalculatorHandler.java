@@ -27,4 +27,18 @@ public class CalculatorHandler {
                 .body(this.calculatorService.multiply(serverRequest.queryParam("value1").get(),
                         serverRequest.queryParam("value2").get()), Double.class);
     }
+
+    public Mono<ServerResponse> divide(ServerRequest serverRequest) {
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(this.calculatorService.divide(serverRequest.queryParam("value1").get(),
+                        serverRequest.queryParam("value2").get()), Double.class);
+    }
+
+    public Mono<ServerResponse> subtract(ServerRequest serverRequest) {
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(this.calculatorService.subtract(serverRequest.queryParam("value1").get(),
+                        serverRequest.queryParam("value2").get()), Double.class);
+    }
 }

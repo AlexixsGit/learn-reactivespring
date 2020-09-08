@@ -28,7 +28,11 @@ public class RouterFunctionConfig {
         return RouterFunctions.route(GET("/functional/calculator/sum")
                 .and(accept(MediaType.APPLICATION_JSON)), calculatorHandler::sum)
                 .andRoute(GET("/functional/calculator/multiply").and(accept(MediaType.APPLICATION_JSON)),
-                        calculatorHandler::multiply);
+                        calculatorHandler::multiply)
+                .andRoute(GET("/functional/calculator/divide").and(accept(MediaType.APPLICATION_JSON))
+                        , calculatorHandler::divide)
+                .andRoute(GET("/functional/calculator/subtract").and(accept(MediaType.APPLICATION_JSON))
+                        , calculatorHandler::subtract);
     }
 
 }
