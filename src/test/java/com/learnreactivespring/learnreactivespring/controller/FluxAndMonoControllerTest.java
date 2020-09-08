@@ -1,6 +1,5 @@
 package com.learnreactivespring.learnreactivespring.controller;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @WebFluxTest
@@ -81,6 +82,21 @@ public class FluxAndMonoControllerTest {
                 .expectBodyList(Integer.class)
                 .returnResult();
 
-        Assertions.assertEquals(expected, actual.getResponseBody());
+        assertEquals(expected, actual.getResponseBody());
+    }
+
+    @Test
+    public void mono_should_return_one_value_test() {
+
+        Integer expected = 1;
+
+        webTestClient.get().uri("/mono")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Integer.class)
+                .consumeWith((response) -> {
+                    assertEquals(expected, response.getResponseBody());
+                });
     }
 }
